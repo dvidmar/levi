@@ -1,0 +1,45 @@
+- label: 1
+  name: '[+] includes-quote'
+  comments: 'Message includes quotes'
+  voters:
+  - apply_to: text
+    negate: false
+    regex: '(?:".+"|".+")'
+- label: 1
+  name: '[+] edu-not-sci'
+  comments: 'Email from .edu AND category not in science.'
+  voters:
+  - apply_to: header
+    negate: false
+    regex: \.edu\b
+  - apply_to: category
+    negate: true
+    regex: '^sci\.'
+- label: 1
+  name: '[+] is-reply'
+  comments: 'Message is a reply via header'
+  voters:
+  - apply_to: header
+    negate: false
+    regex: '\bre:'
+- label: 0
+  name: '[-] includes-phone-number'
+  comments: 'Message includes a phone number'
+  voters:
+  - apply_to: text
+    negate: false
+    regex: '(?:\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}'
+- label: 0
+  name: '[-] is-rec-or-talk'
+  comments: 'Category is either `rec` OR `talk`'
+  voters:
+  - apply_to: category
+    negate: false
+    regex: '^(?:rec|talk)\.'
+- label: 0
+  name: '[-] more-than-30-lines'
+  comments: 'Message is more than 30 lines long via header'
+  voters:
+  - apply_to: header
+    negate: false
+    regex: '\bLines: (?:[3-9]\d|\d{3,})\b'

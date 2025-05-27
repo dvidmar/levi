@@ -1,0 +1,8 @@
+# Label Estimation via Inference (LEVI)
+This code represents a minimal implementation required to get started using LEVI with defined labeling functions (LFs) on data saved locally to CSV.  This does not include significant boilerplate code required to deal with the complexities of specific EHR data, but can be modified to run at scale on a particular system with the regex patterns defined in the LFs YAML file.
+
+## Data Format
+Each column in the CSV file should represent a different "modality" of data (e.g. note_text, diagnosis code, medications, etc), with each modality converted to a string to allow for application of voting via regex.  Modalities can also include different parsed sections of larger notes.  More complicated voting procedures (e.g. neural network output, spaCy output, etc) can be implemented separately and saved as a "new" column with simple string output (e.g. "predicted positive" or "predicted negative"), and paired with an LF regex voter on these simple strings.
+
+## Getting Started
+A toy example of running this code on open-source data with *random* LFs is provided in the `getting-started.ipynb` notebook.  As these LFs do not represent a particular target, the output scores should not be interpreted as meaningful (and, of course, will not align with any particular priors). To test out on your own data, replace the CSV file and LFs YAML file with your own data and LFs.
